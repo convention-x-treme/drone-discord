@@ -1,17 +1,17 @@
 ---
 date: 2017-06-10T00:00:00+00:00
 title: Discord
-author: appleboy
+author: Convention-X-Treme
 tags: [ notifications, chat ]
-repo: appleboy/drone-discord
+repo: convention-x-treme/drone-discord
 logo: discord.svg
-repo: appleboy/drone-discord
-image: appleboy/drone-discord
+repo: convention-x-treme/drone-discord
+image: cfkn/drone-discord
 ---
 
 Webhooks are a low-effort way to post messages to channels in Discord. They do not require a bot user or authentication to use.
 
-The webhook provided by discord is a single URL which contains the webhook_id and the webhook_token. The URL follows the following pattern: 
+The webhook provided by discord is a single URL which contains the webhook_id and the webhook_token. The URL follows the following pattern:
 
 ```sh
 https://discord.com/api/webhooks/<webhook_id>/<webhook_token>
@@ -21,7 +21,7 @@ The discord plugin posts build status messages to discord channel. The below pip
 
 ```yaml
 - name: discord notification
-  image: appleboy/drone-discord
+  image: cfkn/drone-discord
   settings:
     webhook_id: xxxxxxxxxx
     webhook_token: xxxxxxxxxx
@@ -31,7 +31,7 @@ Example configuration with TTS (text-to-speech) message:
 
 ```diff
   - name: discord notification
-    image: appleboy/drone-discord
+    image: cfkn/drone-discord
     settings:
       webhook_id: xxxxxxxxxx
       webhook_token: xxxxxxxxxx
@@ -43,11 +43,11 @@ Example configuration with override the default username of the webhook:
 
 ```diff
   - name: discord notification
-    image: appleboy/drone-discord
+    image: cfkn/drone-discord
     settings:
       webhook_id: xxxxxxxxxx
       webhook_token: xxxxxxxxxx
-+     username: appleboy
++     username: convention-x-treme
       message: "Testing from drone image"
 ```
 
@@ -55,11 +55,11 @@ Example configuration with override the default avatar of the webhook:
 
 ```diff
   - name: discord notification
-    image: appleboy/drone-discord
+    image: cfkn/drone-discord
     settings:
       webhook_id: xxxxxxxxxx
       webhook_token: xxxxxxxxxx
-+     avatar_url: http://exampple.com/appleboy.png
++     avatar_url: http://exampple.com/convention-x-treme.png
       message: "Testing from drone image"
 ```
 
@@ -67,7 +67,7 @@ Example configuration with a custom message template:
 
 ```diff
   - name: discord notification
-    image: appleboy/drone-discord
+    image: cfkn/drone-discord
     settings:
       webhook_id: xxxxxxxxxx
       webhook_token: xxxxxxxxxx
@@ -83,7 +83,7 @@ Example configuration using credentials from secrets:
 
 ```diff
   - name: discord notification
-    image: appleboy/drone-discord
+    image: cfkn/drone-discord
     settings:
       webhook_id:
         from_secret: discord_webhook_id

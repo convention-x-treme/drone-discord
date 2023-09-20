@@ -20,10 +20,10 @@ func TestTemplate(t *testing.T) {
 	plugin := Plugin{
 		Repo: Repo{
 			Name:      "go-hello",
-			Namespace: "appleboy",
+			Namespace: "convention-x-treme",
 		},
 		Commit: Commit{
-			Author:  "appleboy",
+			Author:  "convention-x-treme",
 			Branch:  "master",
 			Message: "update by drone discord plugin. \r\n update by drone discord plugin.",
 			Avatar:  "https://avatars0.githubusercontent.com/u/21979?v=3&s=100",
@@ -31,7 +31,7 @@ func TestTemplate(t *testing.T) {
 		Build: Build{
 			Number: 101,
 			Status: "success",
-			Link:   "https://github.com/appleboy/go-hello",
+			Link:   "https://github.com/convention-x-treme/go-hello",
 			Event:  "tag",
 		},
 
@@ -54,7 +54,7 @@ func TestTemplate(t *testing.T) {
 	assert.Nil(t, err)
 
 	plugin.Clear()
-	plugin.Config.Message = []string{"I am appleboy"}
+	plugin.Config.Message = []string{"We are Convention-X-Treme"}
 	plugin.Payload.TTS = true
 	plugin.Payload.Wait = true
 	err = plugin.Exec()

@@ -4,7 +4,7 @@ GOFMT ?= gofmt "-s"
 GO ?= go
 
 # for dockerhub
-DEPLOY_ACCOUNT := appleboy
+DEPLOY_ACCOUNT := cfkn
 DEPLOY_IMAGE := $(EXECUTABLE)
 
 TARGETS ?= linux darwin windows

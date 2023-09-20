@@ -1,6 +1,6 @@
-module github.com/appleboy/drone-discord
+module github.com/convention-x-treme/drone-discord
 
-go 1.20
+go 1.21
 
 require (
 	github.com/appleboy/drone-template-lib v1.0.1-0.20210703043441-92442f23f605

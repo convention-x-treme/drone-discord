@@ -27,11 +27,11 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "Drone Discord"
 	app.Usage = "Sending message to Discord channel using Webhook"
-	app.Copyright = "Copyright (c) " + year + " Bo-Yi Wu"
+	app.Copyright = "Copyright (c) " + year + " Convention-X-Treme"
 	app.Authors = []cli.Author{
 		{
-			Name:  "Bo-Yi Wu",
-			Email: "appleboy.tw@gmail.com",
+			Name:  "Convention-X-Treme",
+			Email: "dev@convention-x-treme.de",
 		},
 	}
 	app.Action = run
