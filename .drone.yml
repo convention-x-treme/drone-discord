@@ -9,6 +9,9 @@ trigger:
     - push
     - cron
 
+image_pull_secrets:
+  - DOCKER_REGISTRY_AUTH
+
 workspace:
   path: /usr/src
   
