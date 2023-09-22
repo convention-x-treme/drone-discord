@@ -1,4 +1,4 @@
-package main
+package discord
 
 import (
 	"bytes"
@@ -13,7 +13,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/appleboy/drone-template-lib/template"
+	"github.com/convention-x-treme/drone-discord/internal/renderer"
 )
 
 const (
@@ -128,7 +128,7 @@ type (
 )
 
 func templateMessage(t string, plugin Plugin) (string, error) {
-	return template.RenderTrim(t, plugin)
+	return renderer.RenderTrim(t, plugin)
 }
 
 // Creates a new file upload http request with optional extra params
