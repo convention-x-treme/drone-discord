@@ -108,6 +108,7 @@ steps:
       password:
         from_secret: 'DOCKER_REGISTRY_PASSWORD'
       dockerfile: 'build/linux-amd64.Dockerfile'
+      platform: linux/amd64
       tags:
         - latest
 
@@ -123,6 +124,7 @@ steps:
       password:
         from_secret: 'DOCKER_REGISTRY_PASSWORD'
       dockerfile: 'build/linux-arm64.Dockerfile'
+      platform: linux/arm64
       tags:
         - latest
 
@@ -138,20 +140,6 @@ steps:
       password:
         from_secret: 'DOCKER_REGISTRY_PASSWORD'
       dockerfile: 'build/linux-arm.Dockerfile'
-      tags:
-        - latest
-
-  - name: container-image-windows
-    depends_on:
-      - build-windows
-    image: plugins/docker
-    settings:
-      repo: registry.convention-x-treme.de/infra/drone-discord
-      registry: registry.convention-x-treme.de
-      username:
-        from_secret: 'DOCKER_REGISTRY_USER'
-      password:
-        from_secret: 'DOCKER_REGISTRY_PASSWORD'
-      dockerfile: 'build/windows.Dockerfile'
+      platform: linux/arm
       tags:
         - latest
