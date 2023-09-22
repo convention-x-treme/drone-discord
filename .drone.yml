@@ -55,9 +55,43 @@ steps:
       - ci/set-version.sh
       - sonar-scanner
 
-  - name: build
+  - name: build-linux-amd64
     depends_on:
       - install-modules
     image: registry.convention-x-treme.de/baseimages/golang:latest
+    environment:
+      GOOS: linux
+      GOARCH: amd64
     commands:
-      - go build -o plugin.bin -v ./cmd/plugin/...
+      - go build -o release/linux/amd64/drone-discord -v ./cmd/plugin/...
+
+  - name: build-linux-arm64
+    depends_on:
+      - install-modules
+    image: registry.convention-x-treme.de/baseimages/golang:latest
+    environment:
+      GOOS: linux
+      GOARCH: arm64
+    commands:
+      - go build -o release/linux/arm64/drone-discord -v ./cmd/plugin/...
+
+  - name: build-linux-arm
+    depends_on:
+      - install-modules
+    image: registry.convention-x-treme.de/baseimages/golang:latest
+    environment:
+      GOOS: linux
+      GOARCH: arm
+      GOARM: 7
+    commands:
+      - go build -o release/linux/arm/drone-discord -v ./cmd/plugin/...
+
+  - name: build-windows
+    depends_on:
+      - install-modules
+    image: registry.convention-x-treme.de/baseimages/golang:latest
+    environment:
+      GOOS: windows
+      GOARCH: amd64
+    commands:
+      - go build -o release/drone-discord.exe -v ./cmd/plugin/...
