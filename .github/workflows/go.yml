@@ -25,4 +25,7 @@ jobs:
       run: go build -v ./...
 
     - name: Test
+      env:
+        WEBHOOK_ID: 830120621395804201
+        WEBHOOK_TOKEN: iGfvubUkl48pZkMhnAUSPmQZp0Z4qLbqAd3ID4V3KTJos0lh9QTFM7r_wbB45pfohz-C
       run: go test -v ./...
