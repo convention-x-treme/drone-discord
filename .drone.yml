@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: develop
+name: testing
 
 trigger:
   branch:
@@ -55,50 +55,36 @@ steps:
       - ci/set-version.sh
       - sonar-scanner
 
-  - name: build-linux-amd64
-    depends_on:
-      - install-modules
+---
+kind: pipeline
+type: docker
+name: develop-linux-amd64
+
+trigger:
+  branch:
+    - feature/build
+  event:
+    - push
+    - cron
+
+image_pull_secrets:
+  - DOCKER_REGISTRY_AUTH
+
+workspace:
+  path: /usr/src
+
+platform:
+  arch: amd64
+  
+steps:
+  - name: build
     image: registry.convention-x-treme.de/baseimages/golang:latest
-    environment:
-      GOOS: linux
-      GOARCH: amd64
     commands:
       - go build -o release/linux/amd64/drone-discord -v ./cmd/plugin/...
 
-  - name: build-linux-arm64
+  - name: container-image
     depends_on:
-      - install-modules
-    image: registry.convention-x-treme.de/baseimages/golang:latest
-    environment:
-      GOOS: linux
-      GOARCH: arm64
-    commands:
-      - go build -o release/linux/arm64/drone-discord -v ./cmd/plugin/...
-
-  - name: build-linux-arm
-    depends_on:
-      - install-modules
-    image: registry.convention-x-treme.de/baseimages/golang:latest
-    environment:
-      GOOS: linux
-      GOARCH: arm
-      GOARM: 7
-    commands:
-      - go build -o release/linux/arm/drone-discord -v ./cmd/plugin/...
-
-  - name: build-windows
-    depends_on:
-      - install-modules
-    image: registry.convention-x-treme.de/baseimages/golang:latest
-    environment:
-      GOOS: windows
-      GOARCH: amd64
-    commands:
-      - go build -o release/drone-discord.exe -v ./cmd/plugin/...
-
-  - name: container-image-linux-amd64
-    depends_on:
-      - build-linux-amd64
+      - build
     image: plugins/docker
     settings:
       repo: registry.convention-x-treme.de/infra/drone-discord
@@ -112,9 +98,35 @@ steps:
       tags:
         - latest
 
-  - name: container-image-linux-arm64
+---
+kind: pipeline
+type: docker
+name: develop-linux-arm64
+
+trigger:
+  branch:
+    - feature/build
+  event:
+    - push
+    - cron
+
+image_pull_secrets:
+  - DOCKER_REGISTRY_AUTH
+
+workspace:
+  path: /usr/src
+
+platform:
+  arch: arm64
+  
+steps:
+  - name: build
+    image: registry.convention-x-treme.de/baseimages/golang:latest
+    commands:
+      - go build -o release/linux/arm64/drone-discord -v ./cmd/plugin/...
+  - name: container-image
     depends_on:
-      - build-linux-arm64
+      - build
     image: plugins/docker
     settings:
       repo: registry.convention-x-treme.de/infra/drone-discord
@@ -128,9 +140,35 @@ steps:
       tags:
         - latest
 
-  - name: container-image-linux-arm
+---
+kind: pipeline
+type: docker
+name: develop-linux-arm
+
+trigger:
+  branch:
+    - feature/build
+  event:
+    - push
+    - cron
+
+image_pull_secrets:
+  - DOCKER_REGISTRY_AUTH
+
+workspace:
+  path: /usr/src
+
+platform:
+  arch: arm
+  
+steps:
+  - name: build
+    image: registry.convention-x-treme.de/baseimages/golang:latest
+    commands:
+      - go build -o release/linux/arm64/drone-discord -v ./cmd/plugin/...
+  - name: container-image
     depends_on:
-      - build-linux-arm
+      - build
     image: plugins/docker
     settings:
       repo: registry.convention-x-treme.de/infra/drone-discord
