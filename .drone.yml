@@ -117,7 +117,7 @@ steps:
   - name: build
     image: registry.convention-x-treme.de/baseimages/golang:latest
     commands:
-      - CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -a -o release/linux/amd64/drone-discord ./cmd/plugin/...
+      - CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -a -o release/linux/arm64/drone-discord ./cmd/plugin/...
 
   - name: container-image
     depends_on:
@@ -157,7 +157,7 @@ steps:
   - name: build
     image: registry.convention-x-treme.de/baseimages/golang:latest
     commands:
-      - CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -a -o release/linux/amd64/drone-discord ./cmd/plugin/...
+      - CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -a -o release/linux/arm/drone-discord ./cmd/plugin/...
       
   - name: container-image
     depends_on:
