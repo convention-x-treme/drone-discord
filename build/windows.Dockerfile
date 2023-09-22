@@ -1,4 +1,4 @@
-FROM microsoft/nanoserver:10.0.14393.1884
+FROM mcr.microsoft.com/windows/nanoserver:ltsc2022
 
 LABEL maintainer="Convention-X-Treme <dev@convention-x-treme.de>" \
   org.label-schema.name="Drone Discord" \
