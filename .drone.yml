@@ -27,9 +27,9 @@ steps:
     image: registry.convention-x-treme.de/baseimages/golang:latest
     environment:
       WEBHOOK_ID:
-        from_secret: 'DISCORD_WEBHOOK_ID'
+        from_secret: 'DISCORD_WEBHOOK_ID_PLAYGROUND'
       WEBHOOK_TOKEN:
-        from_secret: 'DISCORD_WEBHOOK_TOKEN'
+        from_secret: 'DISCORD_WEBHOOK_TOKEN_PLAYGROUND'
     commands:
       - go test -short -coverprofile coverage.out $(go list ./... | grep -v /vendor/)
 
