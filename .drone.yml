@@ -1,0 +1,52 @@
+kind: pipeline
+type: docker
+name: develop
+
+trigger:
+  branch:
+    - feature/build
+  event:
+    - push
+    - cron
+
+workspace:
+  path: /usr/src
+  
+steps:
+  - name: install-modules
+    image: registry.convention-x-treme.de/baseimages/golang:latest
+    commands:
+      - go mod download && go mod verify
+    
+  - name: testcoverage
+    depends_on:
+      - install-modules
+    image: registry.convention-x-treme.de/baseimages/golang:latest
+    commands:
+      - go test -short -coverprofile coverage.out $(go list ./... | grep -v /vendor/)
+
+  - name: linting
+    depends_on:
+      - install-modules
+    failure: ignore
+    image: golangci/golangci-lint:latest-alpine
+    commands:
+      - golangci-lint run -v --timeout 3m0s
+      
+  - name: code-analysis
+    depends_on:
+      - testcoverage
+      - linting
+    image: sonarsource/sonar-scanner-cli
+    environment:
+      SONAR_TOKEN:
+        from_secret: SONAR_TOKEN
+      SONAR_HOST_URL:
+        from_secret: SONAR_HOST
+
+  - name: build
+    depends_on:
+      - install-modules
+    image: registry.convention-x-treme.de/baseimages/golang:latest
+    commands:
+      - go build -o plugin.bin -v ./cmd/plugin/...
