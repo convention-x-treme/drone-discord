@@ -95,3 +95,18 @@ steps:
       GOARCH: amd64
     commands:
       - go build -o release/drone-discord.exe -v ./cmd/plugin/...
+
+  - name: container-image-linux-amd64
+    depends_on:
+      - build-linux-amd64
+    image: plugins/docker
+    settings:
+      repo: registry.convention-x-treme.de/infra/drone-discord
+      registry: registry.convention-x-treme.de
+      username:
+        from_secret: 'DOCKER_REGISTRY_USER'
+      password:
+        from_secret: 'DOCKER_REGISTRY_PASSWORD'
+      dockerfile: 'build/linux-amd64.Dockerfile'
+      tags:
+        - latest
