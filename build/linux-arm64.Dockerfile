@@ -7,6 +7,4 @@ LABEL maintainer="Convention-X-Treme <dev@convention-x-treme.de>" \
 
 COPY release/linux/arm64/drone-discord /bin/drone-discord
 
-RUN chmod +x /bin/drone-discord
-
 ENTRYPOINT ["/bin/drone-discord"]
