@@ -110,3 +110,48 @@ steps:
       dockerfile: 'build/linux-amd64.Dockerfile'
       tags:
         - latest
+
+  - name: container-image-linux-arm64
+    depends_on:
+      - build-linux-arm64
+    image: plugins/docker
+    settings:
+      repo: registry.convention-x-treme.de/infra/drone-discord
+      registry: registry.convention-x-treme.de
+      username:
+        from_secret: 'DOCKER_REGISTRY_USER'
+      password:
+        from_secret: 'DOCKER_REGISTRY_PASSWORD'
+      dockerfile: 'build/linux-arm64.Dockerfile'
+      tags:
+        - latest
+
+  - name: container-image-linux-arm
+    depends_on:
+      - build-linux-arm
+    image: plugins/docker
+    settings:
+      repo: registry.convention-x-treme.de/infra/drone-discord
+      registry: registry.convention-x-treme.de
+      username:
+        from_secret: 'DOCKER_REGISTRY_USER'
+      password:
+        from_secret: 'DOCKER_REGISTRY_PASSWORD'
+      dockerfile: 'build/linux-arm.Dockerfile'
+      tags:
+        - latest
+
+  - name: container-image-windows
+    depends_on:
+      - build-windows
+    image: plugins/docker
+    settings:
+      repo: registry.convention-x-treme.de/infra/drone-discord
+      registry: registry.convention-x-treme.de
+      username:
+        from_secret: 'DOCKER_REGISTRY_USER'
+      password:
+        from_secret: 'DOCKER_REGISTRY_PASSWORD'
+      dockerfile: 'build/linux-windows.Dockerfile'
+      tags:
+        - latest
