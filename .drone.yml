@@ -72,15 +72,12 @@ image_pull_secrets:
 
 workspace:
   path: /usr/src
-
-platform:
-  arch: amd64
   
 steps:
   - name: build
     image: registry.convention-x-treme.de/baseimages/golang:latest
     commands:
-      - go build -o release/linux/amd64/drone-discord -v ./cmd/plugin/...
+      - CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o release/linux/amd64/drone-discord ./cmd/plugin/...
 
   - name: container-image
     depends_on:
@@ -115,15 +112,13 @@ image_pull_secrets:
 
 workspace:
   path: /usr/src
-
-platform:
-  arch: arm64
   
 steps:
   - name: build
     image: registry.convention-x-treme.de/baseimages/golang:latest
     commands:
-      - go build -o release/linux/arm64/drone-discord -v ./cmd/plugin/...
+      - CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -a -o release/linux/amd64/drone-discord ./cmd/plugin/...
+
   - name: container-image
     depends_on:
       - build
@@ -157,15 +152,13 @@ image_pull_secrets:
 
 workspace:
   path: /usr/src
-
-platform:
-  arch: arm
   
 steps:
   - name: build
     image: registry.convention-x-treme.de/baseimages/golang:latest
     commands:
-      - go build -o release/linux/arm64/drone-discord -v ./cmd/plugin/...
+      - CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -a -o release/linux/amd64/drone-discord ./cmd/plugin/...
+      
   - name: container-image
     depends_on:
       - build
