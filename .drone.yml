@@ -152,6 +152,6 @@ steps:
         from_secret: 'DOCKER_REGISTRY_USER'
       password:
         from_secret: 'DOCKER_REGISTRY_PASSWORD'
-      dockerfile: 'build/linux-windows.Dockerfile'
+      dockerfile: 'build/windows.Dockerfile'
       tags:
         - latest
