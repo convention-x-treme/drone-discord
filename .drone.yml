@@ -94,6 +94,7 @@ steps:
       platform: linux/amd64
       tags:
         - latest
+        - latest-amd64
 
 ---
 kind: pipeline
@@ -133,7 +134,7 @@ steps:
       dockerfile: 'build/linux-arm64.Dockerfile'
       platform: linux/arm64
       tags:
-        - latest
+        - latest-arm64
 
 ---
 kind: pipeline
@@ -173,4 +174,4 @@ steps:
       dockerfile: 'build/linux-arm.Dockerfile'
       platform: linux/arm
       tags:
-        - latest
+        - latest-arm
