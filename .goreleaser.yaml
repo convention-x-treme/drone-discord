@@ -33,7 +33,7 @@ archives:
 
 dockers:
   - image_templates:
-    - "convention-x-treme/{{ .ProjectName }}:{{ .Version }}-amd64"
+    - "conventionxtreme/{{ .ProjectName }}:{{ .Version }}-amd64"
     dockerfile: build/linux-amd64.Dockerfile
     use: buildx
     build_flag_templates:
@@ -47,7 +47,7 @@ dockers:
     - --label=org.opencontainers.image.revision={{ .FullCommit }}
     - --label=org.opencontainers.image.licenses=MIT
   - image_templates:
-    - "convention-x-treme/{{ .ProjectName }}:{{ .Version }}-arm64v8"
+    - "conventionxtreme/{{ .ProjectName }}:{{ .Version }}-arm64v8"
     goarch: arm64
     dockerfile: build/linux-arm64.Dockerfile
     use: buildx
@@ -62,7 +62,7 @@ dockers:
     - --label=org.opencontainers.image.revision={{ .FullCommit }}
     - --label=org.opencontainers.image.licenses=MIT
   - image_templates:
-    - "convention-x-treme/{{ .ProjectName }}:{{ .Version }}-arm32v7"
+    - "conventionxtreme/{{ .ProjectName }}:{{ .Version }}-arm32v7"
     goarch: arm
     dockerfile: build/linux-arm.Dockerfile
     use: buildx
@@ -78,13 +78,13 @@ dockers:
     - --label=org.opencontainers.image.licenses=MIT
 
 docker_manifests:
-  - name_template: convention-x-treme/{{ .ProjectName }}:{{ .Version }}
+  - name_template: conventionxtreme/{{ .ProjectName }}:{{ .Version }}
     image_templates:
-    - "convention-x-treme/{{ .ProjectName }}:{{ .Version }}-amd64"
-    - "convention-x-treme/{{ .ProjectName }}:{{ .Version }}-arm64v8"
-    - "convention-x-treme/{{ .ProjectName }}:{{ .Version }}-arm32v7"
-  - name_template: convention-x-treme/{{ .ProjectName }}:latest
+    - "conventionxtreme/{{ .ProjectName }}:{{ .Version }}-amd64"
+    - "conventionxtreme/{{ .ProjectName }}:{{ .Version }}-arm64v8"
+    - "conventionxtreme/{{ .ProjectName }}:{{ .Version }}-arm32v7"
+  - name_template: conventionxtreme/{{ .ProjectName }}:latest
     image_templates:
-    - "convention-x-treme/{{ .ProjectName }}:{{ .Version }}-amd64"
-    - "convention-x-treme/{{ .ProjectName }}:{{ .Version }}-arm64v8"
-    - "convention-x-treme/{{ .ProjectName }}:{{ .Version }}-arm32v7"
+    - "conventionxtreme/{{ .ProjectName }}:{{ .Version }}-amd64"
+    - "conventionxtreme/{{ .ProjectName }}:{{ .Version }}-arm64v8"
+    - "conventionxtreme/{{ .ProjectName }}:{{ .Version }}-arm32v7"
