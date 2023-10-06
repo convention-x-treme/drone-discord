@@ -6,7 +6,7 @@ tags: [ notifications, chat ]
 repo: convention-x-treme/drone-discord
 logo: discord.svg
 repo: convention-x-treme/drone-discord
-image: cfkn/drone-discord
+image: conventionxtreme/drone-discord
 ---
 
 Webhooks are a low-effort way to post messages to channels in Discord. They do not require a bot user or authentication to use.
@@ -21,7 +21,7 @@ The discord plugin posts build status messages to discord channel. The below pip
 
 ```yaml
 - name: discord notification
-  image: cfkn/drone-discord
+  image: conventionxtreme/drone-discord
   settings:
     webhook_id: xxxxxxxxxx
     webhook_token: xxxxxxxxxx
@@ -31,7 +31,7 @@ Example configuration with TTS (text-to-speech) message:
 
 ```diff
   - name: discord notification
-    image: cfkn/drone-discord
+    image: conventionxtreme/drone-discord
     settings:
       webhook_id: xxxxxxxxxx
       webhook_token: xxxxxxxxxx
@@ -43,7 +43,7 @@ Example configuration with override the default username of the webhook:
 
 ```diff
   - name: discord notification
-    image: cfkn/drone-discord
+    image: conventionxtreme/drone-discord
     settings:
       webhook_id: xxxxxxxxxx
       webhook_token: xxxxxxxxxx
@@ -55,7 +55,7 @@ Example configuration with override the default avatar of the webhook:
 
 ```diff
   - name: discord notification
-    image: cfkn/drone-discord
+    image: conventionxtreme/drone-discord
     settings:
       webhook_id: xxxxxxxxxx
       webhook_token: xxxxxxxxxx
@@ -67,7 +67,7 @@ Example configuration with a custom message template:
 
 ```diff
   - name: discord notification
-    image: cfkn/drone-discord
+    image: conventionxtreme/drone-discord
     settings:
       webhook_id: xxxxxxxxxx
       webhook_token: xxxxxxxxxx
@@ -83,7 +83,7 @@ Example configuration using credentials from secrets:
 
 ```diff
   - name: discord notification
-    image: cfkn/drone-discord
+    image: conventionxtreme/drone-discord
     settings:
       webhook_id:
         from_secret: discord_webhook_id
