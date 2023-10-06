@@ -78,13 +78,13 @@ dockers:
     - --label=org.opencontainers.image.licenses=MIT
 
 docker_manifests:
-  - name_template: carazzim0/{{ .ProjectName }}:{{ .Version }}
+  - name_template: cfkn/{{ .ProjectName }}:{{ .Version }}
     image_templates:
-    - "carazzim0/{{ .ProjectName }}:{{ .Version }}-amd64"
-    - "carazzim0/{{ .ProjectName }}:{{ .Version }}-arm64v8"
-    - "carazzim0/{{ .ProjectName }}:{{ .Version }}-arm32v7"
-  - name_template: carazzim0/{{ .ProjectName }}:latest
+    - "cfkn/{{ .ProjectName }}:{{ .Version }}-amd64"
+    - "cfkn/{{ .ProjectName }}:{{ .Version }}-arm64v8"
+    - "cfkn/{{ .ProjectName }}:{{ .Version }}-arm32v7"
+  - name_template: cfkn/{{ .ProjectName }}:latest
     image_templates:
-    - "carazzim0/{{ .ProjectName }}:{{ .Version }}-amd64"
-    - "carazzim0/{{ .ProjectName }}:{{ .Version }}-arm64v8"
-    - "carazzim0/{{ .ProjectName }}:{{ .Version }}-arm32v7"
+    - "cfkn/{{ .ProjectName }}:{{ .Version }}-amd64"
+    - "cfkn/{{ .ProjectName }}:{{ .Version }}-arm64v8"
+    - "cfkn/{{ .ProjectName }}:{{ .Version }}-arm32v7"
