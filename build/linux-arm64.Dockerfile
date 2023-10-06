@@ -1,10 +1,10 @@
-FROM microsoft/nanoserver:10.0.14393.1884
+FROM plugins/base:linux-arm64
 
 LABEL maintainer="Convention-X-Treme <dev@convention-x-treme.de>" \
   org.label-schema.name="Drone Discord" \
   org.label-schema.vendor="Convention-X-Treme" \
   org.label-schema.schema-version="1.0"
 
-COPY release/drone-discord.exe C:/bin/drone-discord.exe
+COPY drone-discord /bin/drone-discord
 
-ENTRYPOINT [ "C:\\bin\\drone-discord.exe" ]
+ENTRYPOINT ["/bin/drone-discord"]

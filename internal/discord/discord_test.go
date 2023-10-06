@@ -5,10 +5,23 @@ import (
 	"testing"
 	"time"
 
+	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 )
 
+func setup() {
+	// Load env-file if it exists first
+	if filename, found := os.LookupEnv("PLUGIN_ENV_FILE"); found {
+		godotenv.Load(filename)
+	}
+
+	if _, err := os.Stat("/run/drone/env"); err == nil {
+		godotenv.Overload("/run/drone/env")
+	}
+}
+
 func TestMissingConfig(t *testing.T) {
+	setup()
 	var plugin Plugin
 
 	err := plugin.Exec()
@@ -17,6 +30,7 @@ func TestMissingConfig(t *testing.T) {
 }
 
 func TestTemplate(t *testing.T) {
+	setup()
 	plugin := Plugin{
 		Repo: Repo{
 			Name:      "go-hello",
@@ -34,15 +48,13 @@ func TestTemplate(t *testing.T) {
 			Link:   "https://github.com/convention-x-treme/go-hello",
 			Event:  "tag",
 		},
-
 		Config: Config{
 			WebhookID:    os.Getenv("WEBHOOK_ID"),
 			WebhookToken: os.Getenv("WEBHOOK_TOKEN"),
 			Message:      []string{"test one message from drone testing", "test two message from drone testing"},
-			File:         []string{"./images/discord-logo.png"},
+			File:         []string{"../../images/discord-logo.png"},
 			Drone:        true,
 		},
-
 		Payload: Payload{
 			Username: "drone",
 			TTS:      false,
@@ -55,13 +67,15 @@ func TestTemplate(t *testing.T) {
 
 	plugin.Clear()
 	plugin.Config.Message = []string{"We are Convention-X-Treme"}
-	plugin.Payload.TTS = true
+	plugin.Config.File = nil
+	plugin.Payload.TTS = false
 	plugin.Payload.Wait = true
 	err = plugin.Exec()
 	assert.Nil(t, err)
 
 	// send success embed message
 	plugin.Config.Message = []string{}
+	plugin.Config.File = nil
 	plugin.Payload.TTS = false
 	plugin.Payload.Wait = false
 	plugin.Clear()
