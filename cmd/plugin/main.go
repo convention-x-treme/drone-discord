@@ -6,6 +6,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/convention-x-treme/drone-discord/internal/discord"
 	"github.com/joho/godotenv"
 	"github.com/urfave/cli"
 )
@@ -228,20 +229,20 @@ func main() {
 }
 
 func run(c *cli.Context) error {
-	plugin := Plugin{
-		GitHub: GitHub{
+	plugin := discord.Plugin{
+		GitHub: discord.GitHub{
 			Workflow:  c.String("github.workflow"),
 			Workspace: c.String("github.workspace"),
 			Action:    c.String("github.action"),
 			EventName: c.String("github.event.name"),
 			EventPath: c.String("github.event.path"),
 		},
-		Repo: Repo{
+		Repo: discord.Repo{
 			FullName:  c.String("repo"),
 			Namespace: c.String("repo.namespace"),
 			Name:      c.String("repo.name"),
 		},
-		Commit: Commit{
+		Commit: discord.Commit{
 			Sha:     c.String("commit.sha"),
 			Ref:     c.String("commit.ref"),
 			Branch:  c.String("commit.branch"),
@@ -251,7 +252,7 @@ func run(c *cli.Context) error {
 			Avatar:  c.String("commit.author.avatar"),
 			Message: c.String("commit.message"),
 		},
-		Build: Build{
+		Build: discord.Build{
 			Tag:      c.String("build.tag"),
 			Number:   c.Int("build.number"),
 			Event:    c.String("build.event"),
@@ -262,7 +263,7 @@ func run(c *cli.Context) error {
 			PR:       c.String("pull.request"),
 			DeployTo: c.String("deploy.to"),
 		},
-		Config: Config{
+		Config: discord.Config{
 			WebhookID:    c.String("webhook-id"),
 			WebhookToken: c.String("webhook-token"),
 			Message:      c.StringSlice("message"),
@@ -271,7 +272,7 @@ func run(c *cli.Context) error {
 			Drone:        c.Bool("drone"),
 			GitHub:       c.Bool("github"),
 		},
-		Payload: Payload{
+		Payload: discord.Payload{
 			Wait:      c.Bool("wait"),
 			Username:  c.String("username"),
 			AvatarURL: c.String("avatar-url"),
